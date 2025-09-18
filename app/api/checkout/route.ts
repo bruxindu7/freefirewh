@@ -6,7 +6,7 @@ const PIX_CREATE_PATH = "/v1/transactions";
 
 // 🔐 lista de domínios permitidos
 const allowedOrigins = [
-  "https://www.recargasjogo-mx.site",
+  "https://www.recagasjogos.de",
   "http://localhost:3000",
 ];
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
           : undefined,
       },
       tracking: {
-        ref: process.env.SITE_NAME || "FreefireJ", // ✅ identifica o site
+        ref: process.env.SITE_NAME || "FreefireWh", // ✅ identifica o site
         src: null,
         sck: null,
         utm_source: null,
