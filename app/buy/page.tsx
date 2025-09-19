@@ -51,7 +51,7 @@ export default function PixPage() {
 
     const statusInterval = setInterval(async () => {
       try {
-    if (!data.externalId) return;
+        if (!data.externalId) return;
         const r = await fetch(`/api/checkout/status/${data.externalId}`);
         const json = await r.json();
 
@@ -59,21 +59,22 @@ export default function PixPage() {
           showToast("success", "Pagamento aprovado!", "Redirecionando...");
           clearInterval(statusInterval);
 
-          const priceNumber = parseFloat(String(data.totalAmount || data.price).replace(",", ".")) || 0;
-        if (typeof window !== "undefined" && (window as any).gtag) {
-  (window as any).gtag("event", "conversion", {
-    send_to: "AW-17521187394/a2Z0CLqZy5kbEMK04KJB",
-    value: priceNumber || 1.0,
-    currency: "BRL",
-    transaction_id: data.externalId || data.id || "",
-  });
-  (window as any).gtag("event", "conversion", {
-    send_to: "AW-17521187394/XXXXXXX", 
-    value: priceNumber || 1.0,
-    currency: "BRL",
-    transaction_id: data.externalId || "",
-  });
-}
+          const priceNumber =
+            parseFloat(String(data.totalAmount || data.price).replace(",", ".")) ||
+            0;
+
+          // =============================
+          // 🚀 Snippet de conversão Google Ads
+          // =============================
+          if (typeof window !== "undefined" && (window as any).gtag) {
+            (window as any).gtag("event", "conversion", {
+              send_to: "AW-17521187394/9g3ZCM_9kp4bEMK04KJB",
+              value: priceNumber || 1.0,
+              currency: "BRL",
+              transaction_id: data.externalId || data.id || "",
+            });
+          }
+
           window.location.href = "/upsell";
         }
 
@@ -109,16 +110,21 @@ export default function PixPage() {
 
   if (!pixData) return null;
 
-  const isSpecial = !pixData.bonus || pixData.bonus === "null" || pixData.bonus === "";
+  const isSpecial =
+    !pixData.bonus || pixData.bonus === "null" || pixData.bonus === "";
 
-  const baseNum = isSpecial ? 0 : parseInt(String(pixData.base).replace(/\D/g, "")) || 0;
-  const bonusNum = isSpecial ? 0 : parseInt(String(pixData.bonus).replace(/\D/g, "")) || 0;
+  const baseNum =
+    isSpecial ? 0 : parseInt(String(pixData.base).replace(/\D/g, "")) || 0;
+  const bonusNum =
+    isSpecial ? 0 : parseInt(String(pixData.bonus).replace(/\D/g, "")) || 0;
   const total = isSpecial ? 0 : baseNum + bonusNum;
 
-  sessionStorage.setItem("pixCheckout", JSON.stringify({
-    ...pixData,
-    totalAmount: isSpecial ? pixData.price : total
-  }));
+  sessionStorage.setItem(
+    "pixCheckout",
+    JSON.stringify({
+      ...pixData,
+      totalAmount: isSpecial ? pixData.price : total,
+    }));
 
   return (
     <>
