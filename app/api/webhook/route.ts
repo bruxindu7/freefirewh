@@ -3,9 +3,8 @@ import type { NextRequest } from "next/server";
 
 const transactions: Record<string, any> = {}; // memória (reinicia a cada deploy)
 
-// 🔐 lista de domínios permitidos
 const allowedOrigins = [
-  "https://www.recagasjogos.de",
+  "https://www.recargajogo.mom",
 ];
 
 // helper para validar origem
