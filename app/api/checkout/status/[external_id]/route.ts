@@ -36,7 +36,7 @@ export async function GET(
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.BUCKPAY_TOKEN!}`,
-          "User-Agent": "Buckpay API", // 🔥 obrigatório
+          "User-Agent": "Buckpay API",
         },
       }
     );
@@ -58,7 +58,7 @@ export async function GET(
       { status: 200 }
     );
   } catch (err) {
-    console.error("⛔ Erro backend status PIX:", err);
+    console.error("Erro backend status PIX:", err);
     return NextResponse.json(
       { error: "Falha ao consultar status PIX" },
       { status: 500 }
